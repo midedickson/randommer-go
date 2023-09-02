@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	randommer.Init("4311161c65594d53a565ccc6c250049a")
+	randommer.Init("fba3fcbcaea346fc8f34acbb3d3efc60")
 	card_types := randommer.GetCardTypes()
 	fmt.Println(card_types)
 	randomCard := randommer.GetRandomCard()
@@ -20,5 +20,12 @@ func main() {
 	fmt.Println(firstNames)
 	surNames := randommer.GetRandomNames("surname", 10)
 	fmt.Println(surNames)
-
+	cryptoAddressTypes := randommer.GetCryptoAdressTypes()
+	fmt.Println(cryptoAddressTypes)
+	cryptoAddressByType := randommer.GetCryptoAdressByType(string(cryptoAddressTypes[0]))
+	fmt.Println(cryptoAddressByType)
+	availableCountries := randommer.GetAvailabeCountries()
+	fmt.Println(availableCountries)
+	accountNumber := randommer.GetAccountNumberByCountry(availableCountries[0].CountryCode)
+	fmt.Println(accountNumber)
 }

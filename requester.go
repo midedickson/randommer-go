@@ -25,7 +25,7 @@ func (r *requester) Get(path string) (*http.Response, error) {
 		fmt.Println(err)
 		return nil, err
 	}
-	new_request.Header.Set("X-Api-Key", r.ApiKey)
+	new_request.Header.Set("X-API-KEY", r.ApiKey)
 	new_request.Header.Set("Content-Type", "application/json")
 	res, err := r.Do(new_request)
 	if err != nil {

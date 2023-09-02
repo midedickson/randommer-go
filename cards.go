@@ -3,7 +3,7 @@ package randommer
 import "fmt"
 
 func GetCardTypes() []CardType {
-	path := req.buildPath("Card/Types")
+	path := req.buildPath(CARD_TYPES)
 	res, _ := req.Get(path)
 	defer res.Body.Close()
 	var types []CardType
@@ -12,7 +12,7 @@ func GetCardTypes() []CardType {
 }
 
 func GetRandomCard() Card {
-	path := req.buildPath("Card")
+	path := req.buildPath(CARD)
 	res, _ := req.Get(path)
 	defer res.Body.Close()
 	var cardJson apiMapResponse
@@ -22,20 +22,11 @@ func GetRandomCard() Card {
 }
 
 func GetCardByType(cardType string) Card {
-	path := req.buildPath(fmt.Sprintf("Card?type=%s", cardType))
+	path := req.buildPath(fmt.Sprintf(CARD_BY_TYPE, cardType))
 	res, _ := req.Get(path)
 	defer res.Body.Close()
 	var cardJson apiMapResponse
 	parseRequestBody(res.Body, &cardJson)
 	card := *newCard(cardJson)
 	return card
-}
-
-func GetRandomNames(nameType string, quantity int) []Name {
-	path := req.buildPath(fmt.Sprintf("Name?nameType=%s&quantity=%d", nameType, quantity))
-	res, _ := req.Get(path)
-	defer res.Body.Close()
-	var names []Name
-	parseRequestBody(res.Body, &names)
-	return names
 }

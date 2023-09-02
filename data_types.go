@@ -24,4 +24,37 @@ func newCard(cardJson apiMapResponse) *Card {
 	}
 }
 
+// finance
+type CryptoAddressType string
+type CryptoAddress struct {
+	Address string
+	Type    string
+}
+type Country struct {
+	Name        string
+	CountryCode string
+}
+
+func newCryptoAddress(cryptoAddressJson apiMapResponse) *CryptoAddress {
+	return &CryptoAddress{
+		Address: cryptoAddressJson["address"].(string),
+		Type:    cryptoAddressJson["type"].(string),
+	}
+}
+
+func makeCountries(countryArr []apiMapResponse) []Country {
+	var countries []Country
+	for _, country := range countryArr {
+		countries = append(countries, Country{
+			Name:        country["name"].(string),
+			CountryCode: country["countryCode"].(string),
+		})
+	}
+	return countries
+
+}
+
+type AccountNumber string
+
+// names
 type Name string
