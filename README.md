@@ -28,3 +28,5 @@ Get your API key from - https://randommer.io/
   - GetRandomAddresses
 
   ### Examples present in "example" folder.
+
+most recent version: v0.2.0
