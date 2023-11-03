@@ -35,6 +35,11 @@ type Country struct {
 	CountryCode string
 }
 
+type ValidatorResult struct {
+	IsValid bool
+	Message string
+}
+
 func newCryptoAddress(cryptoAddressJson apiMapResponse) *CryptoAddress {
 	return &CryptoAddress{
 		Address: cryptoAddressJson["address"].(string),
@@ -54,7 +59,38 @@ func makeCountries(countryArr []apiMapResponse) []Country {
 
 }
 
+func newValidatorResult(validatorResponse apiMapResponse) *ValidatorResult {
+	message, ok := validatorResponse["errorMessage"].(string)
+	if !ok {
+		message = "VAT is valid!"
+	}
+	return &ValidatorResult{
+		IsValid: validatorResponse["isValid"].(bool),
+		Message: message,
+	}
+}
+
 type AccountNumber string
 
 // names
 type Name string
+
+// misc
+// Culture represents struct for timezone code and full area name
+type Culture struct {
+	Code string
+	Name string
+}
+
+func makeCultures(cultureArr []apiMapResponse) []Culture {
+	var cultures []Culture
+	for _, culture := range cultureArr {
+		cultures = append(cultures, Culture{
+			Code: culture["code"].(string),
+			Name: culture["name"].(string),
+		})
+	}
+	return cultures
+}
+
+type RandomAddress string

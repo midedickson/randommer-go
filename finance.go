@@ -39,3 +39,13 @@ func GetAccountNumberByCountry(countryCode string) AccountNumber {
 	parseRequestBody(res.Body, &accountNumber)
 	return accountNumber
 }
+
+func ValidateVAT(countryCode, vat string) ValidatorResult {
+	path := req.buildPath(fmt.Sprintf(VAT_VALIDATOR, countryCode, vat))
+	res, _ := req.Post(path, "")
+	defer res.Body.Close()
+	var validatorResultMapResponse apiMapResponse
+	parseRequestBody(res.Body, &validatorResultMapResponse)
+	validatorResult := newValidatorResult(validatorResultMapResponse)
+	return *validatorResult
+}
